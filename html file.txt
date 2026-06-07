@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🎉</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffb347);
+}
+
+/* Birthday Card */
+.card{
+    width:90%;
+    max-width:500px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:30px;
+    text-align:center;
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    z-index:10;
+}
+
+.card h1{
+    font-size:2.5rem;
+    margin-bottom:15px;
+    animation:bounce 2s infinite;
+}
+
+.card p{
+    font-size:1.1rem;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 25px;
+    border:none;
+    border-radius:50px;
+    background:white;
+    color:#ff4f81;
+    font-size:1rem;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.08);
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+
+/* Balloons */
+.balloon{
+    position:absolute;
+    bottom:-150px;
+    width:60px;
+    height:80px;
+    border-radius:50%;
+    animation:float 10s linear infinite;
+}
+
+.balloon::after{
+    content:'';
+    position:absolute;
+    width:2px;
+    height:80px;
+    background:white;
+    left:50%;
+    top:80px;
+}
+
+.balloon:nth-child(1){
+    left:10%;
+    background:#ff4d6d;
+    animation-duration:8s;
+}
+
+.balloon:nth-child(2){
+    left:30%;
+    background:#4cc9f0;
+    animation-duration:10s;
+}
+
+.balloon:nth-child(3){
+    left:60%;
+    background:#f9c74f;
+    animation-duration:9s;
+}
+
+.balloon:nth-child(4){
+    left:85%;
+    background:#90be6d;
+    animation-duration:11s;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(-120vh);
+    }
+}
+
+/* Confetti */
+.confetti{
+    position:absolute;
+    width:10px;
+    height:10px;
+    top:-10px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+
+@media(max-width:600px){
+    .card h1{
+        font-size:2rem;
+    }
+
+    .card p{
+        font-size:1rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Balloons -->
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+
+<!-- Birthday Card -->
+<div class="card">
+    <h1>🎂 Happy Birthday! 🎉</h1>
+    <p>
+        Wishing you a day filled with happiness, laughter,
+        love, and unforgettable memories. May all your dreams
+        come true and may this year bring endless success and joy!
+        ✨🎁🎈
+    </p>
+
+    <button class="btn" onclick="celebrate()">
+        Celebrate 🎊
+    </button>
+</div>
+
+<!-- Confetti Script -->
+<script>
+function createConfetti() {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+
+    const colors = [
+        "#ff4d6d",
+        "#ffd60a",
+        "#06d6a0",
+        "#118ab2",
+        "#8338ec",
+        "#ffffff"
+    ];
+
+    confetti.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    confetti.style.animationDuration =
+        (Math.random() * 3 + 2) + "s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(() => {
+        confetti.remove();
+    }, 5000);
+}
+
+setInterval(createConfetti, 80);
+
+function celebrate(){
+    for(let i=0;i<100;i++){
+        setTimeout(createConfetti,i*20);
+    }
+}
+</script>
+
+</body>
+</html>
